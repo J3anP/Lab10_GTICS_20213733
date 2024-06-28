@@ -11,31 +11,39 @@
     <h1>El juego de la memoria</h1>
     <h5>Total de imágenes seleccionadas: </h5>
 
-
-    <button class="btn btn-success" type="ola">Agregar imágenes</button>
-    <input type="file" id="file-selector" accept=".png" onchange="uploadImages()"/>
-    <input type="file" id="file" accept="images/*" onchange="putImages()">
+    <button class="btn btn-success">Agregar imágenes</button>
+    <input type="file" id="file-selector" accept=".png" onchange="uploadImages()" multiple/>
+    <!--<input type="file" id="file" accept=".png" onchange="putImages()">-->
     <br>
     <img id="pokemon"/>
     <script>
-
+        //se elige varios archivos
         function uploadImages(){
-            const fileSelector = document.getElementById('file-selector');
-            fileSelector.addEventListener('change', (event) => {
+            const file = document.getElementById('file-selector');
+            file.addEventListener('change', (event) => {
                 const fileList = event.target.files;
                 console.log(fileList);
             });
-        }
-        function putImages(){
-            var imagen = document.getElementById("file-selector");
-            var reader = new FileReader();
-            if (file) {
-                reader.readAsDataURL(imagen );
+            //se muestra las imagenes
+            if(file){
+                reader.readAsDataURL(file);
                 reader.onloadend = function () {
                     document.getElementById("pokemon").src = reader.result;
                 }
             }
         }
+
+        function putImages(){
+            const imagen = document.getElementById("file-selector");
+            var reader = new FileReader();
+            if (file) {
+                reader.readAsDataURL(imagen);
+                reader.onloadend = function () {
+                    document.getElementById("pokemon").src = reader.result;
+                }
+            }
+        }
+
     </script>
 
 

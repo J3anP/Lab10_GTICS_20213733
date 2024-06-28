@@ -9,7 +9,7 @@
 <body class="container">
 <div class="container-fluid">
     <h1>El juego de la memoria</h1>
-    <h5>Total de imágenes seleccionadas: </h5>
+    <h5>Total de imágenes seleccionadas: <label onchange="contarImagenes()"></label> </h5>
 
     <button class="btn btn-success">Agregar imágenes</button>
     <input type="file" id="file-pokemon" accept=".png" onchange="uploadImages()" multiple>
@@ -68,6 +68,40 @@
                 reader.readAsDataURL(imagen);
                 reader.onloadend = function () {
                     document.getElementById("pokemon").src = reader.result;
+                }
+            }
+        }
+
+        function contarImagenes(){
+            let numImages = 0;
+            const file = document.getElementById('file-pokemon');
+            file.addEventListener('change', (event) => {
+                const fileList = event.target.files;
+                console.log(fileList);
+                numImages = fileList.length;
+                return numImages;
+            });
+        }
+
+        function formarRectangulo(){
+            let numImages = contarImagenes();
+            let cantDistribution = 2*numImages;
+
+            for (let x = 2; x < 7; x+=2) {
+                for (let y = 1; y < 6; y+=2) {
+                    if (x*y == cantDistribution ) {
+                        for (let i = 0; i <= x; i++) {
+                            for (let j = 0; j <= y; j++) {
+                                if ((i + j) % 2 == 0) {
+                                    tablero += "⬜";
+                                } else {
+                                    tablero += "⬜";
+                                }
+                            }
+                            tablero += "\n";
+                        }
+                        return tablero;
+                    }
                 }
             }
         }

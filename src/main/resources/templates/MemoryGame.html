@@ -12,29 +12,36 @@
     <h5>Total de imágenes seleccionadas: </h5>
 
     <button class="btn btn-success">Agregar imágenes</button>
-    <input type="file" id="file-selector" accept=".png" onchange="uploadImages()" multiple/>
+    <input type="file" id="file-pokemon" accept=".png" onchange="uploadImages()" multiple>
     <!--<input type="file" id="file" accept=".png" onchange="putImages()">-->
     <br>
-    <img id="pokemon"/>
+    <img id="pokemon">
+    <img id="imagenPrev">
+
     <script>
-        //se elige varios archivos
+        //se elige varios archivos a la vez
         function uploadImages(){
-            const file = document.getElementById('file-selector');
+            const file = document.getElementById('file-pokemon');
             file.addEventListener('change', (event) => {
                 const fileList = event.target.files;
                 console.log(fileList);
             });
             //se muestra las imagenes
             if(file){
-                reader.readAsDataURL(file);
+                reader.readAsDataURL(file[0]);
                 reader.onloadend = function () {
                     document.getElementById("pokemon").src = reader.result;
                 }
             }
+
+            const imagenPokemon = file[0];
+            const pokemonURL = URL.createObjectURL(imagenPokemon);
+            $imagenPrev.src = pokemonURL;
         }
 
+        //esta función fue para probar que se muestra la imagen
         function putImages(){
-            const imagen = document.getElementById("file-selector");
+            const imagen = document.getElementById("file-pokemon");
             var reader = new FileReader();
             if (file) {
                 reader.readAsDataURL(imagen);

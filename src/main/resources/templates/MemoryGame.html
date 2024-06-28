@@ -82,11 +82,12 @@
                 return numImages;
             });
         }
-
+        //se formar un tablero que solo cumpla con la diferencia de 1
         function formarRectangulo(){
             let numImages = contarImagenes();
             let cantDistribution = 2*numImages;
-
+            //dado que el limite son 15 imagenes a lo mucho cantDistribution = 20 = 6*5, por ende se
+            //obtiene los patrones validos 2x1, 4x3 y 6x5
             for (let x = 2; x < 7; x+=2) {
                 for (let y = 1; y < 6; y+=2) {
                     if (x*y == cantDistribution ) {
@@ -104,7 +105,28 @@
                     }
                 }
             }
+
+            //para los patrones 2x2, 3x3, 4x4 y 5x5
+            for (let x = 1; x < 6; x++) {
+                for (let y = 1; y < 6; y++) {
+                    if ((x*y == cantDistribution) && x==y ) {
+                        for (let i = 0; i <= x; i++) {
+                            for (let j = 0; j <= y; j++) {
+                                if ((i + j) % 2 == 0) {
+                                    tablero += "⬜";
+                                } else {
+                                    tablero += "⬜";
+                                }
+                            }
+                            tablero += "\n";
+                        }
+                        return tablero;
+                    }
+                }
+            }
         }
+
+
 
     </script>
 

@@ -15,9 +15,32 @@
     <input type="file" id="file-pokemon" accept=".png" onchange="uploadImages()" multiple>
     <!--<input type="file" id="file" accept=".png" onchange="putImages()">-->
     <br>
-    <img id="pokemon">
-    <img id="imagenPrev">
 
+
+    L
+
+
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img id="pokemon" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img id="imagenPrev" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img id="pokemon3" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
     <script>
         //se elige varios archivos a la vez
         function uploadImages(){
@@ -30,13 +53,16 @@
             if(file){
                 reader.readAsDataURL(file[0]);
                 reader.onloadend = function () {
-                    document.getElementById("pokemon").src = reader.result;
+                    document.getElementById("pokemon1").src = reader.result;
                 }
             }
-
-            const imagenPokemon = file[0];
+            const imagenPokemon = file[1];
             const pokemonURL = URL.createObjectURL(imagenPokemon);
             $imagenPrev.src = pokemonURL;
+
+            const imagenPokemon3 = file[2];
+            const pokemonURL3 = URL.createObjectURL(imagenPokemon3);
+            $pokemon3.src = pokemonURL3;
         }
 
         //esta función fue para probar que se muestra la imagen
